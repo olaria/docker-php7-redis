@@ -1,5 +1,20 @@
-FROM olaria/php7-xdebug:alpine
+FROM php:7.2-fpm-alpine3.7
+
+RUN apk add --no-cache \
+		--virtual .phpize_deps \
+		$PHPIZE_DEPS \
+		libxml2-dev \
+        libressl-dev
+
+RUN docker-php-ext-install pdo_mysql zip
+
+RUN pecl install xdebug \
+	&& docker-php-ext-enable xdebug
 
 RUN pecl install redis \
-	&&  docker-php-ext-enable redis \
-	&&  rm -rf /tmp/pear
+	&&  docker-php-ext-enable redis
+
+RUN rm -rf /tmp/pear \
+	&& rm -rf /var/cache/apk/*
+
+RUN apk del .phpize_deps
