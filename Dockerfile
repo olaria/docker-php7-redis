@@ -7,7 +7,7 @@ RUN apk add --no-cache \
 RUN pecl install redis \
 	&&  docker-php-ext-enable redis
 
-RUN rm -rf /tmp/pear \
-	&& rm -rf /var/cache/apk/*
+RUN apk del .phpize_deps 
 
-RUN apk del .phpize_deps
+RUN rm -rf /tmp/* \
+	&& rm -rf /var/cache/apk/*
