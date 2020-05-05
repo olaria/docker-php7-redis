@@ -4,7 +4,7 @@ RUN apk add --no-cache \
 		--virtual .phpize_deps \
 		$PHPIZE_DEPS
 
-RUN pecl install redis \
+RUN pecl install redis-5.1.1 \
 	&&  docker-php-ext-enable redis
 
 RUN apk del .phpize_deps 
