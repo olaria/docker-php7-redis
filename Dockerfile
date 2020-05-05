@@ -1,4 +1,4 @@
-FROM olaria/php7:7.3-alpine
+FROM olaria/php7:7.4-alpine
 
 RUN apk add --no-cache \
 		--virtual .phpize_deps \
